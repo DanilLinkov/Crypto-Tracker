@@ -25,20 +25,23 @@ const DATA = [
   },
 ];
 
-export default function TokenCardsContainer() {
+export default function TokenCardsContainer({ data }) {
   const navigation = useNavigation();
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate("Sylo")}>
-      <TokenCard title={item.title} logo={item.logo} />
-    </TouchableOpacity>
+    <TokenCard
+      name={item.name}
+      icon={item.icon}
+      id={item.id}
+      symbol={item.symbol}
+    />
   );
 
   return (
     <FlatList
-      data={DATA}
+      data={data}
       renderItem={renderItem}
-      keyExtractor={(item) => item.title}
+      keyExtractor={(item) => item.id}
     />
   );
 }
