@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -11,21 +11,6 @@ import Screen from "./Screen";
 import TimeFrameConxtext from "./TimeFrameContext";
 import TokenCard from "./TokenCard";
 
-const DATA = [
-  {
-    logo: "https://static.sylo.io/tokens/sylo.png",
-    title: "Sylo1",
-  },
-  {
-    logo: "https://static.sylo.io/tokens/sylo.png",
-    title: "Sylo2",
-  },
-  {
-    logo: "https://static.sylo.io/tokens/sylo.png",
-    title: "Sylo3",
-  },
-];
-
 export default function TokenCardsContainer({ data }) {
   const navigation = useNavigation();
   const timeFrame = useContext(TimeFrameConxtext);
@@ -36,7 +21,7 @@ export default function TokenCardsContainer({ data }) {
       icon={item.icon}
       id={item.id}
       symbol={item.symbol}
-      timeFrame={timeFrame}
+      timeFrame={timeFrame.timeFrame}
     />
   );
 

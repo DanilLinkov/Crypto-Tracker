@@ -1,17 +1,26 @@
 import { useRoute } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Screen from "../components/Screen";
+import TimeFrameConxtext from "../components/TimeFrameContext";
+import TimeSelector from "../components/TimeSelector";
 import TokenCard from "../components/TokenCard";
 
 export default function TokenScreen() {
   const route = useRoute();
   const { id, symbol, market_cap, volume_24h } = route.params;
+  const timeFrame = useContext(TimeFrameConxtext);
 
   return (
     <Screen>
+      <TimeSelector />
       <View style={styles.tokenCardContainer}>
-        <TokenCard id={id} symbol={symbol} disabled={true} />
+        <TokenCard
+          id={id}
+          symbol={symbol}
+          disabled={true}
+          timeFrame={timeFrame.timeFrame}
+        />
       </View>
       <View style={styles.textContainer}>
         <Text>Information</Text>

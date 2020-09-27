@@ -23,10 +23,15 @@ export default function TokenCard({
   }, [timeFrame]);
 
   const loadTokenPrice = async () => {
+    let isSubscribed = true;
     setLoading(true);
-    const response = await tokensApi.getTokenPrice(id, timeFrame);
-    setTokenPrice(response.data);
-    setLoading(false);
+    await tokensApi.getTokenPrice(id, timeFrame).then((response) => {
+      if (isSubscribed) {
+        setTokenPrice(response.data);
+        setLoading(false);
+      }
+    });
+    return () => (isSubscribed = false);
   };
 
   const getGraphPoints = () => {
@@ -62,6 +67,7 @@ export default function TokenCard({
           id: id,
           symbol: symbol,
           name: name,
+          timeFrame: timeFrame,
           market_cap: tokenPrice.market_cap,
           volume_24h: tokenPrice.volume_24h,
         })
