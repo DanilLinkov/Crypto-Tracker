@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import Screen from "./Screen";
+import TimeFrameConxtext from "./TimeFrameContext";
 import TokenCard from "./TokenCard";
 
 const DATA = [
@@ -27,6 +28,7 @@ const DATA = [
 
 export default function TokenCardsContainer({ data }) {
   const navigation = useNavigation();
+  const timeFrame = useContext(TimeFrameConxtext);
 
   const renderItem = ({ item }) => (
     <TokenCard
@@ -34,6 +36,7 @@ export default function TokenCardsContainer({ data }) {
       icon={item.icon}
       id={item.id}
       symbol={item.symbol}
+      timeFrame={timeFrame}
     />
   );
 

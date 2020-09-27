@@ -7,7 +7,7 @@ const getTokens = () => client.get(assetsEndPoint);
 
 const getTokenPrice = (id, rate) =>
   client.get(
-    assetPriceEndPoint + `/${id}/rate?fiat=NZD&period=week&type=historic`
+    assetPriceEndPoint + `/${id}/rate?fiat=NZD&period=${rate}&type=historic`
   );
 
 export default {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import tokensApi from "../api/tokensApi";
 import Screen from "../components/Screen";
+import { TimeFrameProvider } from "../components/TimeFrameContext";
 import TokenCardsContainer from "../components/TokenCardsContainer";
 
 export default function MainScreen() {
@@ -30,12 +31,11 @@ export default function MainScreen() {
 
   return (
     <Screen styleProp={styles.mainScreenContainer}>
-      <View>
-        <Text>Buttons</Text>
-      </View>
-      <View>
-        <TokenCardsContainer data={tokenList} />
-      </View>
+      <TimeFrameProvider value={"day"}>
+        <View>
+          <TokenCardsContainer data={tokenList} />
+        </View>
+      </TimeFrameProvider>
     </Screen>
   );
 }

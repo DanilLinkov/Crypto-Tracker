@@ -10,6 +10,7 @@ export default function TokenCard({
   name,
   id,
   symbol,
+  timeFrame,
   stylesProp,
   disabled = false,
 }) {
@@ -19,11 +20,11 @@ export default function TokenCard({
 
   useEffect(() => {
     loadTokenPrice();
-  }, []);
+  }, [timeFrame]);
 
   const loadTokenPrice = async () => {
     setLoading(true);
-    const response = await tokensApi.getTokenPrice(id, "implement later");
+    const response = await tokensApi.getTokenPrice(id, timeFrame);
     setTokenPrice(response.data);
     setLoading(false);
   };
