@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import Colours from "./Colours";
 import GradientGraph from "./GradientGraph";
 import NumberFormat from "react-number-format";
+import ThemeContext from "./ThemeContext";
 
 export default function TokenCard({
   icon,
@@ -27,6 +28,9 @@ export default function TokenCard({
   const [tokenPrice, setTokenPrice] = useState({});
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
+  const themeContext = useContext(ThemeContext);
+
+  const theme = themeContext.theme ? Colours.dark : Colours.light;
 
   useEffect(() => {
     let isSubscribed = true;

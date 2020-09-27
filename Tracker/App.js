@@ -3,7 +3,12 @@ import TokenCard from "./components/TokenCard";
 import { Image, StyleSheet, Text, View } from "react-native";
 import TokenScreen from "./screens/TokenScreen";
 import MainScreen from "./screens/MainScreen";
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+  ThemeProvider,
+} from "@react-navigation/native";
 import {
   createStackNavigator,
   CardStyleInterpolators,
@@ -12,7 +17,7 @@ import { TimeFrameProvider } from "./components/TimeFrameContext";
 
 const Stack = createStackNavigator();
 
-const MyTheme = {
+const lightTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
@@ -20,39 +25,53 @@ const MyTheme = {
   },
 };
 
+const darkTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+  },
+};
+
 export default function App() {
   const [timeFrame, setTimeFrame] = useState("month");
+  const [darkThemeEnabled, setDarkThemeEnabled] = useState(true);
 
-  const changeContext = (newTimeFrame) => {
+  const changeTimeFrameContext = (newTimeFrame) => {
     setTimeFrame(newTimeFrame);
   };
 
+  const changeThemeContext = () => {
+    setDarkThemeEnabled(!darkThemeEnabled);
+  };
+
   return (
-    <TimeFrameProvider value={{ timeFrame, changeContext }}>
-      <NavigationContainer theme={MyTheme}>
-        <Stack.Navigator
-          screenOptions={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        >
-          <Stack.Screen
-            name="Tracker"
-            component={MainScreen}
-            options={{
-              headerShown: false,
+    <ThemeProvider value={{ darkThemeEnabled, changeThemeContext }}>
+      <TimeFrameProvider value={{ timeFrame, changeTimeFrameContext }}>
+        <NavigationContainer theme={darkThemeEnabled ? darkTheme : lightTheme}>
+          <Stack.Navigator
+            screenOptions={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
-          />
-          <Stack.Screen
-            name="TokenPage"
-            component={TokenScreen}
-            options={({ route }) => ({
-              title: route.params.name,
-              headerShown: false,
-            })}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </TimeFrameProvider>
+          >
+            <Stack.Screen
+              name="Tracker"
+              component={MainScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="TokenPage"
+              component={TokenScreen}
+              options={({ route }) => ({
+                title: route.params.name,
+                headerShown: false,
+              })}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </TimeFrameProvider>
+    </ThemeProvider>
   );
 }
 
