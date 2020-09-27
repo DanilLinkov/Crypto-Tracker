@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { LineChart } from "react-native-svg-charts";
 import * as shape from "d3-shape";
 import tokensApi from "../api/tokensApi";
@@ -21,20 +28,16 @@ export default function TokenCard({
   const navigation = useNavigation();
 
   useEffect(() => {
-    loadTokenPrice();
-  }, [timeFrame]);
-
-  const loadTokenPrice = async () => {
     let isSubscribed = true;
     setLoading(true);
-    await tokensApi.getTokenPrice(id, timeFrame).then((response) => {
+    tokensApi.getTokenPrice(id, timeFrame).then((response) => {
       if (isSubscribed) {
         setTokenPrice(response.data);
         setLoading(false);
       }
     });
     return () => (isSubscribed = false);
-  };
+  }, [timeFrame]);
 
   const getGraphPoints = () => {
     const graphPoints = [];
@@ -85,6 +88,7 @@ export default function TokenCard({
           timeFrame: timeFrame,
           market_cap: tokenPrice.market_cap,
           volume_24h: tokenPrice.volume_24h,
+          icon: icon,
         })
       }
     >
@@ -155,7 +159,7 @@ export default function TokenCard({
               gradientDisabled={icon || name}
             />
           ) : (
-            <Text>Loading...</Text>
+            <ActivityIndicator size="large" color={Colours.light.graph} />
           )}
         </View>
       </View>

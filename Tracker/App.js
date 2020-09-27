@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import TokenCard from "./components/TokenCard";
 import { Image, StyleSheet, Text, View } from "react-native";
-import TokenCardsContainer from "./components/TokenCardsContainer";
 import TokenScreen from "./screens/TokenScreen";
 import MainScreen from "./screens/MainScreen";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from "@react-navigation/stack";
 import { TimeFrameProvider } from "./components/TimeFrameContext";
 
 const Stack = createStackNavigator();
@@ -19,7 +21,6 @@ const MyTheme = {
 };
 
 export default function App() {
-  const [tokenList, setTokenList] = useState([]);
   const [timeFrame, setTimeFrame] = useState("month");
 
   const changeContext = (newTimeFrame) => {
@@ -29,16 +30,25 @@ export default function App() {
   return (
     <TimeFrameProvider value={{ timeFrame, changeContext }}>
       <NavigationContainer theme={MyTheme}>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}
+        >
           <Stack.Screen
             name="Tracker"
             component={MainScreen}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: false,
+            }}
           />
           <Stack.Screen
             name="TokenPage"
             component={TokenScreen}
-            options={({ route }) => ({ title: route.params.name })}
+            options={({ route }) => ({
+              title: route.params.name,
+              headerShown: false,
+            })}
           />
         </Stack.Navigator>
       </NavigationContainer>

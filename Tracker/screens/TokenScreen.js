@@ -5,14 +5,16 @@ import Screen from "../components/Screen";
 import TimeFrameConxtext from "../components/TimeFrameContext";
 import TimeSelector from "../components/TimeSelector";
 import TokenCard from "../components/TokenCard";
+import TokenScreenHeader from "../components/TokenScreenHeader";
 
 export default function TokenScreen() {
   const route = useRoute();
-  const { id, symbol, market_cap, volume_24h } = route.params;
+  const { id, symbol, market_cap, volume_24h, icon, name } = route.params;
   const timeFrame = useContext(TimeFrameConxtext);
 
   return (
     <Screen>
+      <TokenScreenHeader icon={icon} name={name} />
       <TimeSelector />
       <View style={styles.tokenCardContainer}>
         <TokenCard
