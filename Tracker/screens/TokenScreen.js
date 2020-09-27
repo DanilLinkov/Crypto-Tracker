@@ -6,6 +6,7 @@ import TimeFrameConxtext from "../components/TimeFrameContext";
 import TimeSelector from "../components/TimeSelector";
 import TokenCard from "../components/TokenCard";
 import TokenScreenHeader from "../components/TokenScreenHeader";
+import NumberFormat from "react-number-format";
 
 export default function TokenScreen() {
   const route = useRoute();
@@ -14,28 +15,46 @@ export default function TokenScreen() {
 
   return (
     <Screen>
-      <TokenScreenHeader icon={icon} name={name} />
-      <TimeSelector />
-      <View style={styles.tokenCardContainer}>
-        <TokenCard
-          id={id}
-          symbol={symbol}
-          disabled={true}
-          timeFrame={timeFrame.timeFrame}
-        />
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textPrimary}>Information</Text>
-        <View style={styles.infoContainer}>
-          <View>
-            <Text style={styles.textSecondary}>Symbol: </Text>
-            <Text style={styles.textSecondary}>Market cap: </Text>
-            <Text style={styles.textSecondary}>24h Volume: </Text>
-          </View>
-          <View>
-            <Text style={styles.textSecondary}>{symbol}</Text>
-            <Text style={styles.textSecondary}>${market_cap}</Text>
-            <Text style={styles.textSecondary}>${volume_24h}</Text>
+      <View style={{ alignItems: "center" }}>
+        <TokenScreenHeader icon={icon} name={name} />
+        <TimeSelector />
+        <View style={styles.tokenCardContainer}>
+          <TokenCard
+            id={id}
+            symbol={symbol}
+            disabled={true}
+            timeFrame={timeFrame.timeFrame}
+          />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.textPrimary}>Information</Text>
+          <View style={styles.infoContainer}>
+            <View>
+              <Text style={styles.textSecondary}>Symbol: </Text>
+              <Text style={styles.textSecondary}>Market cap: </Text>
+              <Text style={styles.textSecondary}>24h Volume: </Text>
+            </View>
+            <View>
+              <Text style={styles.textSecondary}>{symbol}</Text>
+              <NumberFormat
+                renderText={(text) => (
+                  <Text style={styles.textSecondary}>{text} NZD</Text>
+                )}
+                value={market_cap.toFixed(2)}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+              <NumberFormat
+                renderText={(text) => (
+                  <Text style={styles.textSecondary}>{text} NZD</Text>
+                )}
+                value={volume_24h.toFixed(2)}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -65,6 +84,5 @@ const styles = StyleSheet.create({
   infoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginLeft: 34,
   },
 });

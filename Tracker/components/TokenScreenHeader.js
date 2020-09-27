@@ -13,6 +13,7 @@ export default function TokenScreenHeader({ name, icon }) {
         onPress={() => {
           navigation.goBack();
         }}
+        hitSlop={{ top: 20, right: 20, left: 20, bottom: 20 }}
       >
         <AntDesign name="left" size={24} color="#495162" />
       </TouchableOpacity>
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     height: 65,
     marginLeft: 21,
     marginRight: 21,
+    alignSelf: "stretch",
   },
   nameText: {
     color: Colours.light.primary,

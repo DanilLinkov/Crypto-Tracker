@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import tokensApi from "../api/tokensApi";
+import Colours from "../components/Colours";
 import MainScreenHeader from "../components/MainScreenHeader";
 import Screen from "../components/Screen";
-import { TimeFrameProvider } from "../components/TimeFrameContext";
 import TimeSelector from "../components/TimeSelector";
 import TokenCardsContainer from "../components/TokenCardsContainer";
 
 export default function MainScreen() {
   const [tokenList, setTokenList] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadTokens();
   }, [searchFilter]);
 
   const loadTokens = async () => {
+    setLoading(true);
     const response = await tokensApi.getTokens();
 
     const filteredResponse = [];
@@ -41,6 +43,7 @@ export default function MainScreen() {
       }
     });
 
+    setLoading(false);
     setTokenList(filteredResponse);
   };
 
@@ -53,7 +56,15 @@ export default function MainScreen() {
         <TimeSelector />
       </View>
       <View>
-        <TokenCardsContainer data={tokenList} />
+        {!loading ? (
+          <TokenCardsContainer data={tokenList} />
+        ) : (
+          <ActivityIndicator
+            size="large"
+            color={Colours.light.graph}
+            style={styles.loadingIndicator}
+          />
+        )}
       </View>
     </Screen>
   );
@@ -63,5 +74,8 @@ const styles = StyleSheet.create({
   mainScreenContainer: {
     alignItems: "center",
     marginBottom: 200,
+  },
+  loadingIndicator: {
+    marginTop: 100,
   },
 });

@@ -10,6 +10,7 @@ export default function TimeButton({ name }) {
     <TouchableOpacity
       style={[styles.button]}
       onPress={() => changeContext(name)}
+      hitSlop={{ top: 10, left: 10, bottom: 0, right: 10 }}
     >
       <Text style={timeFrame === name ? styles.selected : styles.unSelected}>
         {name}

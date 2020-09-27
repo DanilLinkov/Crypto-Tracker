@@ -13,6 +13,7 @@ import tokensApi from "../api/tokensApi";
 import { useNavigation } from "@react-navigation/native";
 import Colours from "./Colours";
 import GradientGraph from "./GradientGraph";
+import NumberFormat from "react-number-format";
 
 export default function TokenCard({
   icon,
@@ -74,12 +75,29 @@ export default function TokenCard({
   const getPriceString = () => {
     const { currencyChange, precentageChange } = calculatePriceChange();
 
-    return `${precentageChange}% (\$${currencyChange})`;
+    return (
+      <NumberFormat
+        renderText={(text) => (
+          <Text
+            style={
+              precentageChange > 0 ? styles.greenPriceText : styles.redPriceText
+            }
+          >
+            {precentageChange}% ({text})
+          </Text>
+        )}
+        value={currencyChange}
+        displayType={"text"}
+        thousandSeparator={true}
+        prefix={"$"}
+      />
+    );
   };
 
   return (
     <TouchableOpacity
       disabled={disabled}
+      hitSlop={{ top: -16 }}
       onPress={() =>
         navigation.navigate("TokenPage", {
           id: id,
@@ -101,67 +119,67 @@ export default function TokenCard({
             : { width: 335, height: 185 },
         ]}
       >
-        <View
-          style={
-            icon || name
-              ? styles.headerContainer
-              : {
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center",
-                  flexDirection: "row",
+        {!loading ? (
+          <React.Fragment>
+            <View
+              style={
+                icon || name
+                  ? styles.headerContainer
+                  : {
+                      flex: 1,
+                      alignItems: "flex-start",
+                      justifyContent: "center",
+                      flexDirection: "row",
+                    }
+              }
+            >
+              <View style={styles.logoTitleContainer}>
+                <Image
+                  style={{ marginRight: 12 }}
+                  source={{
+                    uri: icon,
+                    width: 36,
+                    height: 36,
+                  }}
+                />
+                <Text style={styles.nameText}>{name}</Text>
+              </View>
+              <View
+                style={
+                  icon || name
+                    ? styles.priceContainer
+                    : styles.priceContainerNoTitle
                 }
-          }
-        >
-          <View style={styles.logoTitleContainer}>
-            <Image
-              style={{ marginRight: 12 }}
-              source={{
-                uri: icon,
-                width: 36,
-                height: 36,
-              }}
-            />
-            <Text style={styles.nameText}>{name}</Text>
-          </View>
-          <View
-            style={
-              icon || name
-                ? styles.priceContainer
-                : styles.priceContainerNoTitle
-            }
-          >
-            {!loading ? (
-              <React.Fragment>
-                <Text
-                  style={[
-                    styles.mainPriceText,
-                    icon || name ? { fontSize: 13 } : { fontSize: 18 },
-                  ]}
-                >{`\$${tokenPrice.rate.toFixed(4)}`}</Text>
-                <Text
-                  style={
-                    calculatePriceChange().precentageChange > 0
-                      ? styles.greenPriceText
-                      : styles.redPriceText
-                  }
-                >
-                  {getPriceString()}
-                </Text>
-              </React.Fragment>
-            ) : null}
-          </View>
-        </View>
-        <View style={styles.graphContainer}>
-          {!loading ? (
-            <GradientGraph
-              data={getGraphPoints()}
-              gradientDisabled={icon || name}
-            />
-          ) : (
-            <ActivityIndicator size="large" color={Colours.light.graph} />
-          )}
-        </View>
+              >
+                <NumberFormat
+                  renderText={(text) => (
+                    <Text
+                      style={[
+                        styles.mainPriceText,
+                        icon || name ? { fontSize: 13 } : { fontSize: 18 },
+                      ]}
+                    >
+                      {text}
+                    </Text>
+                  )}
+                  value={tokenPrice.rate.toFixed(4)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+                {getPriceString()}
+              </View>
+            </View>
+            <View style={styles.graphContainer}>
+              <GradientGraph
+                data={getGraphPoints()}
+                gradientDisabled={icon || name}
+              />
+            </View>
+          </React.Fragment>
+        ) : (
+          <ActivityIndicator size="large" color={Colours.light.graph} />
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -175,6 +193,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginTop: 16,
     overflow: "hidden",
+    justifyContent: "center",
   },
   headerContainer: {
     flex: 1,
@@ -221,21 +240,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-// {!loading ? (
-//   <LineChart
-//     style={{
-//       height: 100,
-//     }}
-//     data={getGraphPoints()}
-//     curve={shape.curveNatural}
-//     svg={{
-//       strokeWidth: 2,
-//       stroke: Colours.light.graph,
-//       strokeOpacity: 0.6,
-//     }}
-//     contentInset={{ top: 30, bottom: 30 }}
-//   ></LineChart>
-// ) : (
-//   <Text>loading...</Text>
-// )}

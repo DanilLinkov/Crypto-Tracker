@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { TextInput } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import * as Animate from "react-native-animatable";
 import Colours from "./Colours";
@@ -17,15 +22,16 @@ export default function MainScreenHeader({ onChange }) {
       </View>
       <View>
         {!show ? (
-          <TouchableWithoutFeedback
+          <TouchableOpacity
             onPress={() => {
               setShow(true);
             }}
+            hitSlop={{ top: 20, right: 20, left: 20, bottom: 20 }}
           >
             <View style={styles.searchIcon}>
               <Ionicons name="ios-search" size={24} color="black" />
             </View>
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
         ) : (
           <Animate.View animation="slideInRight" duration={100}>
             <View style={styles.searchContainer}>
@@ -33,21 +39,18 @@ export default function MainScreenHeader({ onChange }) {
                 <TextInput
                   style={styles.textInput}
                   onChangeText={(text) => onChange(text)}
+                  autoFocus={true}
                 />
               </View>
-              <TouchableWithoutFeedback
+              <TouchableOpacity
                 onPress={() => {
                   setShow(false);
                   onChange("");
                 }}
+                hitSlop={{ top: 20, right: 20, left: 20, bottom: 20 }}
               >
-                <AntDesign
-                  name="close"
-                  size={24}
-                  color="black"
-                  style={styles.closeIcon}
-                />
-              </TouchableWithoutFeedback>
+                <AntDesign name="close" size={24} color="black" />
+              </TouchableOpacity>
             </View>
           </Animate.View>
         )}
