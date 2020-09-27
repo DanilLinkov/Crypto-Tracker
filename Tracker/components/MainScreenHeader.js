@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
+import Colours from "./Colours";
 
 export default function MainScreenHeader({ onChange }) {
   const [show, setShow] = useState(false);
@@ -11,7 +12,7 @@ export default function MainScreenHeader({ onChange }) {
     <View style={!show ? styles.container : styles.searchingCointainer}>
       <View></View>
       <View>
-        <Text>Tracker</Text>
+        <Text style={styles.headerTitle}>Tracker</Text>
       </View>
       <View>
         {!show ? (
@@ -53,7 +54,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     width: 340,
+    height: 65,
+  },
+  headerTitle: {
+    color: Colours.light.primary,
+    fontSize: 18,
   },
   searchingCointainer: {
     flexDirection: "row",
@@ -72,7 +79,6 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     borderRadius: 15,
-    margin: 10,
     padding: 10,
   },
 });

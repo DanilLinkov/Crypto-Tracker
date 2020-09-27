@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import Colours from "./Colours";
 import TimeFrameConxtext from "./TimeFrameContext";
 
 export default function TimeButton({ name }) {
@@ -7,23 +8,27 @@ export default function TimeButton({ name }) {
 
   return (
     <TouchableOpacity
-      style={[
-        styles.button,
-        timeFrame === name ? styles.selected : styles.unSelected,
-      ]}
+      style={[styles.button]}
       onPress={() => changeContext(name)}
     >
-      <Text>{name}</Text>
+      <Text style={timeFrame === name ? styles.selected : styles.unSelected}>
+        {name}
+      </Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {},
+  button: {
+    width: 75,
+    height: 20,
+  },
   selected: {
-    backgroundColor: "green",
+    color: Colours.light.graph,
+    alignSelf: "center",
   },
   unSelected: {
-    backgroundColor: "red",
+    color: Colours.light.secondary,
+    alignSelf: "center",
   },
 });

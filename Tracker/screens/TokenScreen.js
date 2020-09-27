@@ -23,11 +23,18 @@ export default function TokenScreen() {
         />
       </View>
       <View style={styles.textContainer}>
-        <Text>Information</Text>
-        <View>
-          <Text>Symbol: {symbol}</Text>
-          <Text>Market cap: ${market_cap}</Text>
-          <Text>24h Volume: ${volume_24h}</Text>
+        <Text style={styles.textPrimary}>Information</Text>
+        <View style={styles.infoContainer}>
+          <View>
+            <Text style={styles.textSecondary}>Symbol: </Text>
+            <Text style={styles.textSecondary}>Market cap: </Text>
+            <Text style={styles.textSecondary}>24h Volume: </Text>
+          </View>
+          <View>
+            <Text style={styles.textSecondary}>{symbol}</Text>
+            <Text style={styles.textSecondary}>${market_cap}</Text>
+            <Text style={styles.textSecondary}>${volume_24h}</Text>
+          </View>
         </View>
       </View>
     </Screen>
@@ -37,8 +44,25 @@ export default function TokenScreen() {
 const styles = StyleSheet.create({
   tokenCardContainer: {
     alignItems: "center",
+    marginTop: 10,
   },
   textContainer: {
-    alignItems: "center",
+    alignItems: "flex-start",
+    marginTop: 30,
+  },
+  textPrimary: {
+    color: Colours.light.primary,
+    fontSize: 15,
+    alignSelf: "center",
+    marginBottom: 5,
+  },
+  textSecondary: {
+    color: Colours.light.secondary,
+    margin: 7,
+  },
+  infoContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginLeft: 34,
   },
 });

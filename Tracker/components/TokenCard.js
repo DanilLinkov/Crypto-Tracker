@@ -4,6 +4,8 @@ import { LineChart } from "react-native-svg-charts";
 import * as shape from "d3-shape";
 import tokensApi from "../api/tokensApi";
 import { useNavigation } from "@react-navigation/native";
+import Colours from "./Colours";
+import GradientGraph from "./GradientGraph";
 
 export default function TokenCard({
   icon,
@@ -38,7 +40,7 @@ export default function TokenCard({
     const graphPoints = [];
     let count = 0;
     tokenPrice.history.forEach((point) => {
-      if (count % 10 === 0) {
+      if (count % 10 === 0 && point.rate > 0) {
         graphPoints.push(point.rate);
       }
       count = count + 1;
@@ -51,10 +53,23 @@ export default function TokenCard({
     let arraySize = tokenPrice.history.length;
 
     const newPrice = tokenPrice.history[arraySize - 1].rate;
-    const oldPrice = tokenPrice.history[arraySize - 10].rate;
+
+    let rewriteCount = 0;
+    while (tokenPrice.history[rewriteCount].rate === -1) {
+      rewriteCount = rewriteCount + 1;
+    }
+    const oldPrice = tokenPrice.history[rewriteCount].rate;
 
     let currencyChange = (newPrice - oldPrice).toFixed(3);
-    let precentageChange = ((newPrice - oldPrice) / oldPrice).toFixed(3);
+    let precentageChange = (((newPrice - oldPrice) * 100) / oldPrice).toFixed(
+      2
+    );
+
+    return { currencyChange, precentageChange };
+  };
+
+  const getPriceString = () => {
+    const { currencyChange, precentageChange } = calculatePriceChange();
 
     return `${precentageChange}% (\$${currencyChange})`;
   };
@@ -73,7 +88,15 @@ export default function TokenCard({
         })
       }
     >
-      <View style={[styles.container, stylesProp]}>
+      <View
+        style={[
+          styles.container,
+          stylesProp,
+          icon || name
+            ? { width: 343, height: 140 }
+            : { width: 335, height: 185 },
+        ]}
+      >
         <View
           style={
             icon || name
@@ -95,7 +118,7 @@ export default function TokenCard({
                 height: 36,
               }}
             />
-            <Text>{name}</Text>
+            <Text style={styles.nameText}>{name}</Text>
           </View>
           <View
             style={
@@ -106,25 +129,33 @@ export default function TokenCard({
           >
             {!loading ? (
               <React.Fragment>
-                <Text>{`\$${tokenPrice.rate.toFixed(4)}`}</Text>
-                <Text>{calculatePriceChange()}</Text>
+                <Text
+                  style={[
+                    styles.mainPriceText,
+                    icon || name ? { fontSize: 13 } : { fontSize: 18 },
+                  ]}
+                >{`\$${tokenPrice.rate.toFixed(4)}`}</Text>
+                <Text
+                  style={
+                    calculatePriceChange().precentageChange > 0
+                      ? styles.greenPriceText
+                      : styles.redPriceText
+                  }
+                >
+                  {getPriceString()}
+                </Text>
               </React.Fragment>
             ) : null}
           </View>
         </View>
         <View style={styles.graphContainer}>
           {!loading ? (
-            <LineChart
-              style={{
-                height: 100,
-              }}
+            <GradientGraph
               data={getGraphPoints()}
-              curve={shape.curveNatural}
-              svg={{ strokeWidth: 2, stroke: "black" }}
-              contentInset={{ top: 20, bottom: 20 }}
-            ></LineChart>
+              gradientDisabled={icon || name}
+            />
           ) : (
-            <Text>loading...</Text>
+            <Text>Loading...</Text>
           )}
         </View>
       </View>
@@ -134,14 +165,10 @@ export default function TokenCard({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: Colours.light.background,
     borderWidth: 2,
-    borderColor: "#F6F6F6",
+    borderColor: Colours.light.border,
     borderRadius: 15,
-    color: "#20232a",
-    width: 343,
-    height: 140,
-    padding: 10,
     marginTop: 16,
     overflow: "hidden",
   },
@@ -149,6 +176,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingRight: 10,
+    paddingLeft: 10,
+    paddingTop: 10,
   },
   logoTitleContainer: {
     alignItems: "center",
@@ -166,4 +196,42 @@ const styles = StyleSheet.create({
   graphContainer: {
     flex: 2,
   },
+  nameText: {
+    color: Colours.light.primary,
+    fontFamily: "sans-serif",
+    fontWeight: "bold",
+    fontSize: 14,
+  },
+  mainPriceText: {
+    color: Colours.light.primary,
+    fontWeight: "bold",
+  },
+  greenPriceText: {
+    color: Colours.light.green,
+    fontFamily: "sans-serif",
+    fontWeight: "bold",
+  },
+  redPriceText: {
+    color: Colours.light.red,
+    fontFamily: "sans-serif",
+    fontWeight: "bold",
+  },
 });
+
+// {!loading ? (
+//   <LineChart
+//     style={{
+//       height: 100,
+//     }}
+//     data={getGraphPoints()}
+//     curve={shape.curveNatural}
+//     svg={{
+//       strokeWidth: 2,
+//       stroke: Colours.light.graph,
+//       strokeOpacity: 0.6,
+//     }}
+//     contentInset={{ top: 30, bottom: 30 }}
+//   ></LineChart>
+// ) : (
+//   <Text>loading...</Text>
+// )}

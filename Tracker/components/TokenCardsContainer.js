@@ -30,13 +30,13 @@ export default function TokenCardsContainer({ data }) {
       data={data}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
+      showsVerticalScrollIndicator={false}
     />
   );
 }
 
 const styles = StyleSheet.create({
   tokenCardsContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    width: 360,
   },
 });

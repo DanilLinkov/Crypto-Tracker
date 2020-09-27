@@ -62,6 +62,6 @@ export default function MainScreen() {
 const styles = StyleSheet.create({
   mainScreenContainer: {
     alignItems: "center",
-    marginBottom: 50,
+    marginBottom: 200,
   },
 });
