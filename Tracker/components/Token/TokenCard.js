@@ -83,7 +83,12 @@ export default function TokenCard({
           <Text
             style={[
               precentageChange > 0
-                ? [styles.precentText, { color: theme.green }]
+                ? [
+                    styles.precentText,
+                    icon || name
+                      ? { color: Colours.light.green }
+                      : { color: theme.green },
+                  ]
                 : [styles.precentText, { color: theme.red }],
             ]}
           >
