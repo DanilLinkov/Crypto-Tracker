@@ -1,13 +1,13 @@
 import { useRoute, useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Screen from "../components/Screen";
-import TimeFrameConxtext from "../components/TimeFrameContext";
-import TimeSelector from "../components/TimeSelector";
-import TokenCard from "../components/TokenCard";
-import TokenScreenHeader from "../components/TokenScreenHeader";
+import Screen from "../Utilities/Screen";
+import TimeFrameConxtext from "../Utilities/TimeFrameContext";
+import TimeSelector from "../ScreenHeaders/TimeSelector";
+import TokenCard from "../Token/TokenCard";
+import TokenScreenHeader from "../ScreenHeaders/TokenScreenHeader";
 import NumberFormat from "react-number-format";
-import Colours from "../components/Colours";
+import Colours from "../Utilities/Colours";
 
 export default function TokenScreen() {
   const route = useRoute();

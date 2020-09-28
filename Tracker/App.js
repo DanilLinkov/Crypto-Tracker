@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Appearance, Image, StyleSheet, Text, View } from "react-native";
-import TokenScreen from "./screens/TokenScreen";
-import MainScreen from "./screens/MainScreen";
+import TokenScreen from "./components/screens/TokenScreen";
+import MainScreen from "./components/screens/MainScreen";
 import {
   DarkTheme,
   DefaultTheme,
@@ -11,7 +11,7 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from "@react-navigation/stack";
-import { TimeFrameProvider } from "./components/TimeFrameContext";
+import { TimeFrameProvider } from "./components/Utilities/TimeFrameContext";
 
 const Stack = createStackNavigator();
 

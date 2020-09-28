@@ -8,11 +8,11 @@ import {
   View,
 } from "react-native";
 import tokensApi from "../api/tokensApi";
-import Colours from "../components/Colours";
-import MainScreenHeader from "../components/MainScreenHeader";
-import Screen from "../components/Screen";
-import TimeSelector from "../components/TimeSelector";
-import TokenCardsContainer from "../components/TokenCardsContainer";
+import Colours from "../Utilities/Colours";
+import MainScreenHeader from "../ScreenHeaders/MainScreenHeader";
+import Screen from "../Utilities/Screen";
+import TimeSelector from "../ScreenHeaders/TimeSelector";
+import TokenCardsContainer from "../Token/TokenCardsContainer";
 
 export default function MainScreen() {
   const [tokenList, setTokenList] = useState([]);

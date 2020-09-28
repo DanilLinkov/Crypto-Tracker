@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { AreaChart, LineChart } from "react-native-svg-charts";
 import { Defs, LinearGradient, Stop, Path } from "react-native-svg";
 import * as shape from "d3-shape";
-import Colours from "./Colours";
+import Colours from "../Utilities/Colours";
 
 export default function GradientGraph({ data, gradientDisabled }) {
   const Gradient = ({ index }) => (

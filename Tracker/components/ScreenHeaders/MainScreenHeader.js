@@ -9,7 +9,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import * as Animate from "react-native-animatable";
-import Colours from "./Colours";
+import Colours from "../Utilities/Colours";
 import { useTheme } from "@react-navigation/native";
 
 export default function MainScreenHeader({ onChange }) {

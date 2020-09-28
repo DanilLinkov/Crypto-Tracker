@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import Colours from "./Colours";
+import Colours from "../Utilities/Colours";
 import { useNavigation } from "@react-navigation/native";
 
 export default function TokenScreenHeader({ name, icon, isDark }) {

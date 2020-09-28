@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Screen from "./Screen";
-import TimeFrameConxtext from "./TimeFrameContext";
+import Screen from "../Utilities/Screen";
+import TimeFrameConxtext from "../Utilities/TimeFrameContext";
 import TokenCard from "./TokenCard";
 
 export default function TokenCardsContainer({ data, refresh, refreshing }) {

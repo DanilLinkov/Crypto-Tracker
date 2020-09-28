@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import tokensApi from "../api/tokensApi";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import Colours from "./Colours";
+import Colours from "../Utilities/Colours";
 import GradientGraph from "./GradientGraph";
 import NumberFormat from "react-number-format";
 
