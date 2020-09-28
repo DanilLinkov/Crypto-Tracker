@@ -28,6 +28,10 @@ export default function TokenCard({
   const navigationTheme = useTheme();
 
   const theme = navigationTheme.dark ? Colours.dark : Colours.light;
+  let iconTheme = "";
+  if (icon) {
+    iconTheme = navigationTheme.dark ? icon.dark : icon.light;
+  }
 
   useEffect(() => {
     let isSubscribed = true;
@@ -138,14 +142,16 @@ export default function TokenCard({
               }
             >
               <View style={styles.logoTitleContainer}>
-                <Image
-                  style={{ marginRight: 12 }}
-                  source={{
-                    uri: icon,
-                    width: 36,
-                    height: 36,
-                  }}
-                />
+                {iconTheme !== "" ? (
+                  <Image
+                    style={{ marginRight: 12 }}
+                    source={{
+                      uri: iconTheme,
+                      width: 36,
+                      height: 36,
+                    }}
+                  />
+                ) : null}
                 <Text style={(styles.nameText, { color: theme.primary })}>
                   {name}
                 </Text>

@@ -48,6 +48,7 @@ export default function MainScreenHeader({ onChange }) {
                   style={styles.textInput}
                   onChangeText={(text) => onChange(text)}
                   autoFocus={true}
+                  color={theme.primary}
                 />
               </View>
               <TouchableOpacity
@@ -55,12 +56,13 @@ export default function MainScreenHeader({ onChange }) {
                   setShow(false);
                   onChange("");
                 }}
-                hitSlop={{ top: 20, right: 20, left: 20, bottom: 20 }}
+                hitSlop={{ top: 30, right: 30, left: 30, bottom: 30 }}
               >
                 <AntDesign
                   name="closecircleo"
                   size={24}
                   color={theme.primary}
+                  style={styles.closeIcon}
                 />
               </TouchableOpacity>
             </View>
@@ -79,6 +81,11 @@ const styles = StyleSheet.create({
     width: 340,
     height: 65,
   },
+  closeIcon: {
+    position: "absolute",
+    top: -12,
+    right: 12,
+  },
   headerTitle: {
     fontSize: 18,
     marginLeft: 65,
@@ -91,14 +98,14 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     flexDirection: "row",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
     width: 340,
     height: 65,
   },
   textInput: {
     height: 40,
-    width: 300,
+    width: 340,
     borderColor: "gray",
     borderWidth: 1,
     borderRadius: 15,

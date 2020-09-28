@@ -8,9 +8,16 @@ import Colours from "./Colours";
 export default function GradientGraph({ data, gradientDisabled }) {
   const Gradient = ({ index }) => (
     <Defs key={index}>
-      <LinearGradient id={"gradient"} x1={"0%"} y1={"0%"} x2={"0%"} y2={"100%"}>
+      <LinearGradient
+        id={"gradient"}
+        x1={"0%"}
+        y1={"0%"}
+        x2={"0%"}
+        y2={"100%"}
+        gradientUnits="userSpaceOnUse"
+      >
         <Stop offset={"0%"} stopColor={"rgb(241, 90, 41)"} stopOpacity={0.2} />
-        <Stop offset={"100%"} stopColor={"rgb(0, 0, 0)"} stopOpacity={0} />
+        <Stop offset={"100%"} stopColor={"rgb(241, 90, 41)"} stopOpacity={0} />
       </LinearGradient>
     </Defs>
   );
@@ -40,14 +47,14 @@ export default function GradientGraph({ data, gradientDisabled }) {
             stroke: Colours.light.graph,
             strokeOpacity: 0.6,
           }}
-          contentInset={{ top: 5, bottom: 100 }}
+          contentInset={{ top: 2, bottom: 70 }}
         ></LineChart>
       ) : (
         <AreaChart
-          style={{ height: 150 }}
+          style={{ height: 200 }}
           data={data}
           curve={shape.curveBasis}
-          contentInset={{ bottom: 100 }}
+          contentInset={{ top: 1, bottom: 80, left: 0, right: 0 }}
           svg={{
             fill: "url(#gradient)",
           }}

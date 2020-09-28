@@ -30,6 +30,9 @@ export default function MainScreen() {
     const response = await tokensApi.getTokens();
 
     const filteredResponse = [];
+    // navigatorTheme.dark
+    //         ? token.icon_address_dark
+    //         : token.icon_address,
 
     response.data.forEach((token) => {
       if (
@@ -40,18 +43,20 @@ export default function MainScreen() {
           id: token.id,
           name: token.name,
           symbol: token.symbol,
-          icon: navigatorTheme.dark
-            ? token.icon_address_dark
-            : token.icon_address,
+          icon: {
+            dark: token.icon_address_dark,
+            light: token.icon_address,
+          },
         });
       } else if (setSearchFilter.length < 1) {
         filteredResponse.push({
           id: token.id,
           name: token.name,
           symbol: token.symbol,
-          icon: navigatorTheme.dark
-            ? token.icon_address_dark
-            : token.icon_address,
+          icon: {
+            dark: token.icon_address_dark,
+            light: token.icon_address,
+          },
         });
       }
     });

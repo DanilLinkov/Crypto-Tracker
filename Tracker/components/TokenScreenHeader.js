@@ -8,6 +8,8 @@ export default function TokenScreenHeader({ name, icon, isDark }) {
   const navigation = useNavigation();
 
   const theme = isDark ? Colours.dark : Colours.light;
+  const iconTheme =
+    isDark && icon && icon.dark && icon.light ? icon.dark : icon.light;
 
   return (
     <View style={styles.headerContainer}>
@@ -22,7 +24,7 @@ export default function TokenScreenHeader({ name, icon, isDark }) {
       <View style={styles.titleIconContainer}>
         <Image
           source={{
-            uri: icon,
+            uri: iconTheme,
             width: 36,
             height: 36,
           }}
