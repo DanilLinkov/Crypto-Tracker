@@ -124,7 +124,7 @@ export default function TokenCard({
           stylesProp,
           icon || name
             ? { width: 343, height: 140 }
-            : { width: 335, height: 185 },
+            : { width: 335, height: 185, paddingTop: 12 },
         ]}
       >
         {!loading ? (

@@ -17,7 +17,7 @@ export default function GradientGraph({ data, gradientDisabled }) {
         gradientUnits="userSpaceOnUse"
       >
         <Stop offset={"0%"} stopColor={"rgb(241, 90, 41)"} stopOpacity={0.2} />
-        <Stop offset={"100%"} stopColor={"rgb(241, 90, 41)"} stopOpacity={0} />
+        <Stop offset={"59%"} stopColor={"rgb(241, 90, 41)"} stopOpacity={0} />
       </LinearGradient>
     </Defs>
   );
@@ -54,7 +54,7 @@ export default function GradientGraph({ data, gradientDisabled }) {
           style={{ height: 200 }}
           data={data}
           curve={shape.curveBasis}
-          contentInset={{ top: 1, bottom: 80, left: 0, right: 0 }}
+          contentInset={{ top: 1, bottom: 88, left: 0, right: 0 }}
           svg={{
             fill: "url(#gradient)",
           }}

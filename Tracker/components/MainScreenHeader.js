@@ -34,7 +34,7 @@ export default function MainScreenHeader({ onChange }) {
             onPress={() => {
               setShow(true);
             }}
-            hitSlop={{ top: 20, right: 20, left: 20, bottom: 20 }}
+            hitSlop={{ top: 25, right: 10, left: 50, bottom: 15 }}
           >
             <View style={styles.searchIcon}>
               <Ionicons name="ios-search" size={24} color={theme.primary} />
@@ -112,9 +112,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   searchIcon: {
-    height: 50,
-    width: 50,
-    justifyContent: "center",
-    alignItems: "flex-end",
+    position: "absolute",
+    top: -12,
+    right: 12,
   },
 });

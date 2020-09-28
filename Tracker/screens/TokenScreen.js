@@ -38,48 +38,73 @@ export default function TokenScreen() {
           <Text style={[styles.textPrimary, { color: theme.primary }]}>
             Information
           </Text>
-          <View style={styles.infoContainer}>
-            <View>
-              <Text style={[styles.textSecondary, { color: theme.secondary }]}>
-                Symbol:
-              </Text>
-              <Text style={[styles.textSecondary, { color: theme.secondary }]}>
-                Market cap:
-              </Text>
-              <Text style={[styles.textSecondary, { color: theme.secondary }]}>
-                24h Volume:
-              </Text>
-            </View>
-            <View>
-              <Text style={[styles.textSecondary, { color: theme.secondary }]}>
-                {symbol}
-              </Text>
-              <NumberFormat
-                renderText={(text) => (
-                  <Text
-                    style={[styles.textSecondary, { color: theme.secondary }]}
-                  >
-                    {text} NZD
-                  </Text>
-                )}
-                value={market_cap.toFixed(2)}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"$"}
-              />
-              <NumberFormat
-                renderText={(text) => (
-                  <Text
-                    style={[styles.textSecondary, { color: theme.secondary }]}
-                  >
-                    {text} NZD
-                  </Text>
-                )}
-                value={volume_24h.toFixed(2)}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"$"}
-              />
+          <View style={{ paddingLeft: 34 }}>
+            <View style={styles.infoContainer}>
+              <View>
+                <Text
+                  style={[
+                    styles.textSecondary,
+                    { color: theme.secondary },
+                    { marginRight: 15 },
+                    { width: 87 },
+                  ]}
+                >
+                  Symbol:
+                </Text>
+                <Text
+                  style={[
+                    styles.textSecondary,
+                    { color: theme.secondary },
+                    { marginRight: 15 },
+                    { width: 87 },
+                  ]}
+                >
+                  Market cap:
+                </Text>
+                <Text
+                  style={[
+                    styles.textSecondary,
+                    { color: theme.secondary },
+                    { marginRight: 15 },
+                    { width: 87 },
+                  ]}
+                >
+                  24h Volume:
+                </Text>
+              </View>
+              <View>
+                <Text
+                  style={[styles.textSecondary, { color: theme.secondary }]}
+                >
+                  {symbol}
+                </Text>
+                <NumberFormat
+                  renderText={(text) => (
+                    <Text
+                      style={[styles.textSecondary, { color: theme.secondary }]}
+                    >
+                      {text} NZD
+                    </Text>
+                  )}
+                  value={market_cap.toFixed(2)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+                <NumberFormat
+                  renderText={(text) => (
+                    <Text
+                      style={[styles.textSecondary, { color: theme.secondary }]}
+                    >
+                      {text} NZD
+                    </Text>
+                  )}
+                  value={volume_24h.toFixed(2)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -90,25 +115,22 @@ export default function TokenScreen() {
 
 const styles = StyleSheet.create({
   tokenCardContainer: {
-    alignItems: "center",
-    marginTop: 10,
+    marginTop: 9,
   },
   textContainer: {
-    alignItems: "flex-start",
     marginTop: 30,
+    alignSelf: "stretch",
   },
   textPrimary: {
-    //color: Colours.light.primary,
     fontSize: 15,
     alignSelf: "center",
-    marginBottom: 5,
+    marginBottom: 12,
   },
   textSecondary: {
-    //: Colours.light.secondary,
-    margin: 7,
+    marginBottom: 12,
+    fontSize: 15,
   },
   infoContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
   },
 });
