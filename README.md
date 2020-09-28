@@ -23,7 +23,10 @@
 
 #### Demo/Features
 
-![Main Screen](/images/mainScreenLight.png)![Main Screen](/images/mainScreenLightTimeFrame.png)![Main Screen](/images/searchBarLight.png)
+![Main Screen](/images/mainScreenLight.png)![Main Screen](/images/mainScreenLightTimeFrame.png)
+
+
+![Main Screen](/images/searchBarLight.png)
 
 - Displays a price chart for a given crypto token with the selected time frame
 - Ability to switch time frames changing the chart
