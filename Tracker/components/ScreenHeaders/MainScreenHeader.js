@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   textInput: {
     height: 40,
     width: 340,
-    borderColor: "gray",
+    borderColor: Colours.light.graph,
     borderWidth: 1,
     borderRadius: 15,
     padding: 10,
