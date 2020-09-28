@@ -15,9 +15,8 @@
   
 
 #### Download/fork the repo
-
-- ``` npm install```
 - ``` cd Tracker```
+- ``` npm install```
 - ```expo start```
 
 
