@@ -31,19 +31,13 @@ export default function TimeButton({ name }) {
 
 const styles = StyleSheet.create({
   button: {
-    width: 44,
-    height: 21,
     marginLeft: 22,
     marginRight: 22,
   },
   selected: {
-    //color: Colours.light.graph,
-    alignSelf: "center",
     fontSize: 15,
   },
   unSelected: {
-    //color: Colours.light.secondary,
-    alignSelf: "center",
     fontSize: 15,
   },
 });

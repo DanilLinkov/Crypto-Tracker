@@ -43,7 +43,7 @@ export default function GradientGraph({ data, gradientDisabled }) {
           data={data}
           curve={shape.curveBasis}
           svg={{
-            strokeWidth: 2,
+            strokeWidth: 3,
             stroke: Colours.light.graph,
             strokeOpacity: 0.6,
           }}

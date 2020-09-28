@@ -86,8 +86,8 @@ export default function TokenCard({
           <Text
             style={[
               precentageChange > 0
-                ? [styles.greenPriceText, { color: theme.green }]
-                : [styles.redPriceText, { color: theme.red }],
+                ? [styles.precentText, { color: theme.green }]
+                : [styles.precentText, { color: theme.red }],
             ]}
           >
             {precentageChange}% ({text})
@@ -152,7 +152,7 @@ export default function TokenCard({
                     }}
                   />
                 ) : null}
-                <Text style={(styles.nameText, { color: theme.primary })}>
+                <Text style={[styles.text, { color: theme.primary }]}>
                   {name}
                 </Text>
               </View>
@@ -167,9 +167,9 @@ export default function TokenCard({
                   renderText={(text) => (
                     <Text
                       style={[
-                        styles.mainPriceText,
+                        styles.text,
                         { color: theme.primary },
-                        icon || name ? { fontSize: 13 } : { fontSize: 18 },
+                        icon || name ? { fontSize: 15 } : { fontSize: 18 },
                       ]}
                     >
                       {text}
@@ -200,9 +200,7 @@ export default function TokenCard({
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: Colours.light.background,
     borderWidth: 2,
-    //borderColor: Colours.light.border,
     borderRadius: 15,
     marginTop: 16,
     overflow: "hidden",
@@ -212,8 +210,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
     paddingTop: 10,
   },
   logoTitleContainer: {
@@ -232,24 +230,10 @@ const styles = StyleSheet.create({
   graphContainer: {
     flex: 2,
   },
-  nameText: {
-    //color: Colours.light.primary,
-    fontFamily: "sans-serif",
-    fontWeight: "bold",
-    fontSize: 14,
+  text: {
+    fontSize: 15,
   },
-  mainPriceText: {
-    //color: Colours.light.primary,
-    fontWeight: "bold",
-  },
-  greenPriceText: {
-    //color: Colours.light.green,
-    fontFamily: "sans-serif",
-    fontWeight: "bold",
-  },
-  redPriceText: {
-    color: Colours.light.red,
-    fontFamily: "sans-serif",
-    fontWeight: "bold",
+  precentText: {
+    fontSize: 12,
   },
 });

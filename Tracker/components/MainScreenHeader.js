@@ -78,8 +78,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: 340,
+    width: 375,
     height: 65,
+    padding: 22,
   },
   closeIcon: {
     position: "absolute",
@@ -88,7 +89,6 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    marginLeft: 65,
   },
   headerContainer: {
     flexDirection: "row",
