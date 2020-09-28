@@ -15,7 +15,7 @@
   
 
 #### Download/fork the repo
-
+- ``` cd Tracker```
 - ``` npm install```
 - ```expo start```
 
@@ -23,17 +23,27 @@
 
 #### Demo/Features
 
-![Main Screen](/images/mainScreenLight.png) ![Main Screen](/images/mainScreenLightTimeFrame.png)![Main Screen](/images/searchBarLight.png)
+###### Main Screen
+![Main Screen](/images/mainScreenLight.png)![Main Screen](/images/mainScreenLightTimeFrame.png)
+
+
+###### Search Bar
+
+![Main Screen](/images/searchBarLight.png)
 
 - Displays a price chart for a given crypto token with the selected time frame
 - Ability to switch time frames changing the chart
 - Search bar for the token list
 
+###### Token Screen
+
 ![Main Screen](/images/tokenScreenLight.png)
 
 - Token screen for the pressed token displaying more information
 
-![Main Screen](/images/mainScreenDark.png)![Main Screen](/images/tokenScreenDark.png)
+###### Dark Theme
+
+![Main Screen](/images/mainScreenDark.png)  ![Main Screen](/images/tokenScreenDark.png)
 
 
 
