@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function TokenScreenHeader({ name, icon, isDark }) {
   const navigation = useNavigation();
 
-  const theme = isDark ? Colours.dark : Colours.dark;
+  const theme = isDark ? Colours.dark : Colours.light;
 
   return (
     <View style={styles.headerContainer}>

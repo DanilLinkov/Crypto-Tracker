@@ -1,6 +1,12 @@
 import { useTheme } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Appearance,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import tokensApi from "../api/tokensApi";
 import Colours from "../components/Colours";
 import MainScreenHeader from "../components/MainScreenHeader";
@@ -65,7 +71,11 @@ export default function MainScreen() {
       </View>
       <View>
         {!loading ? (
-          <TokenCardsContainer data={tokenList} refresh={setRefreshing} />
+          <TokenCardsContainer
+            data={tokenList}
+            refresh={setRefreshing}
+            refreshing={loading}
+          />
         ) : (
           <ActivityIndicator
             size="large"

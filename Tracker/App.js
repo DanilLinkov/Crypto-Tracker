@@ -32,6 +32,22 @@ const darkTheme = {
 
 export default function App() {
   const [timeFrame, setTimeFrame] = useState("month");
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+
+  useEffect(() => {
+    const initialTheme = Appearance.getColorScheme(); // Works as expected
+    setTheme(initialTheme || "light");
+
+    const listener = () => {
+      const newTheme = Appearance.getColorScheme();
+      setTheme(newTheme || "light");
+    };
+
+    const subscription = Appearance.addChangeListener(listener);
+    return () => {
+      Appearance.removeChangeListener(listener);
+    };
+  }, []);
 
   const changeTimeFrameContext = (newTimeFrame) => {
     setTimeFrame(newTimeFrame);
@@ -39,9 +55,7 @@ export default function App() {
 
   return (
     <TimeFrameProvider value={{ timeFrame, changeTimeFrameContext }}>
-      <NavigationContainer
-        theme={Appearance.getColorScheme() === "dark" ? darkTheme : lightTheme}
-      >
+      <NavigationContainer theme={theme === "dark" ? darkTheme : lightTheme}>
         <Stack.Navigator
           screenOptions={{
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

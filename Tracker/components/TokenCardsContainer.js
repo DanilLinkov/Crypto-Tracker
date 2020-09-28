@@ -11,7 +11,7 @@ import Screen from "./Screen";
 import TimeFrameConxtext from "./TimeFrameContext";
 import TokenCard from "./TokenCard";
 
-export default function TokenCardsContainer({ data, refresh }) {
+export default function TokenCardsContainer({ data, refresh, refreshing }) {
   const navigation = useNavigation();
   const timeFrame = useContext(TimeFrameConxtext);
 
@@ -32,7 +32,7 @@ export default function TokenCardsContainer({ data, refresh }) {
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
       onRefresh={() => refresh(true)}
-      refreshing={!data}
+      refreshing={refreshing}
     />
   );
 }
