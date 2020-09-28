@@ -23,8 +23,11 @@
 
 #### Demo/Features
 
+###### Main Screen
 ![Main Screen](/images/mainScreenLight.png)![Main Screen](/images/mainScreenLightTimeFrame.png)
 
+
+###### Search Bar
 
 ![Main Screen](/images/searchBarLight.png)
 
@@ -32,9 +35,13 @@
 - Ability to switch time frames changing the chart
 - Search bar for the token list
 
+###### Token Screen
+
 ![Main Screen](/images/tokenScreenLight.png)
 
 - Token screen for the pressed token displaying more information
+
+###### Dark Theme
 
 ![Main Screen](/images/mainScreenDark.png)  ![Main Screen](/images/tokenScreenDark.png)
 
