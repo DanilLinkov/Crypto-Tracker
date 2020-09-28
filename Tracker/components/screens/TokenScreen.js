@@ -1,6 +1,7 @@
 import { useRoute, useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
+
 import Screen from "../Utilities/Screen";
 import TimeFrameConxtext from "../Utilities/TimeFrameContext";
 import TimeSelector from "../ScreenHeaders/TimeSelector";
@@ -12,6 +13,7 @@ import Colours from "../Utilities/Colours";
 export default function TokenScreen() {
   const route = useRoute();
   const { id, symbol, market_cap, volume_24h, icon, name } = route.params;
+
   const timeFrame = useContext(TimeFrameConxtext);
   const navigatorTheme = useTheme();
 

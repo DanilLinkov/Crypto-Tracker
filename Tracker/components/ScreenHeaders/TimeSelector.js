@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import TimeButton from "./TimeButton";
 
 export default function TimeSelector({ styleProp }) {

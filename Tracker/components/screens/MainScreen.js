@@ -1,12 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Appearance,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+
 import tokensApi from "../api/tokensApi";
 import Colours from "../Utilities/Colours";
 import MainScreenHeader from "../ScreenHeaders/MainScreenHeader";
@@ -17,9 +12,9 @@ import TokenCardsContainer from "../Token/TokenCardsContainer";
 export default function MainScreen() {
   const [tokenList, setTokenList] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const navigatorTheme = useTheme();
 
   useEffect(() => {
     loadTokens();
@@ -30,25 +25,15 @@ export default function MainScreen() {
     const response = await tokensApi.getTokens();
 
     const filteredResponse = [];
-    // navigatorTheme.dark
-    //         ? token.icon_address_dark
-    //         : token.icon_address,
 
     response.data.forEach((token) => {
       if (
-        setSearchFilter.length > 0 &&
-        token.name.toLowerCase().includes(searchFilter.toLocaleLowerCase())
+        (searchFilter.length > 0 &&
+          token.name
+            .toLowerCase()
+            .includes(searchFilter.toLocaleLowerCase())) ||
+        searchFilter.length < 1
       ) {
-        filteredResponse.push({
-          id: token.id,
-          name: token.name,
-          symbol: token.symbol,
-          icon: {
-            dark: token.icon_address_dark,
-            light: token.icon_address,
-          },
-        });
-      } else if (setSearchFilter.length < 1) {
         filteredResponse.push({
           id: token.id,
           name: token.name,

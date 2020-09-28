@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 import * as Animate from "react-native-animatable";
-import Colours from "../Utilities/Colours";
 import { useTheme } from "@react-navigation/native";
+
+import Colours from "../Utilities/Colours";
 
 export default function MainScreenHeader({ onChange }) {
   const [show, setShow] = useState(false);
@@ -37,7 +37,7 @@ export default function MainScreenHeader({ onChange }) {
             hitSlop={{ top: 25, right: 10, left: 50, bottom: 15 }}
           >
             <View style={styles.searchIcon}>
-              <Ionicons name="ios-search" size={24} color={theme.primary} />
+              <Ionicons name="ios-search" size={28} color={theme.primary} />
             </View>
           </TouchableOpacity>
         ) : (
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     position: "absolute",
-    top: -12,
-    right: 12,
+    top: -11,
+    right: 0,
   },
 });

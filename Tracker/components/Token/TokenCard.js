@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   ActivityIndicator,
   Image,
@@ -7,11 +7,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import tokensApi from "../api/tokensApi";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import NumberFormat from "react-number-format";
+
 import Colours from "../Utilities/Colours";
 import GradientGraph from "./GradientGraph";
-import NumberFormat from "react-number-format";
+import useTokenPrice from "../Hooks/useTokenPrice";
 
 export default function TokenCard({
   icon,
@@ -22,8 +23,8 @@ export default function TokenCard({
   stylesProp,
   disabled = false,
 }) {
-  const [tokenPrice, setTokenPrice] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [tokenPrice, loading] = useTokenPrice(id, timeFrame);
+
   const navigation = useNavigation();
   const navigationTheme = useTheme();
 
@@ -32,18 +33,6 @@ export default function TokenCard({
   if (icon) {
     iconTheme = navigationTheme.dark ? icon.dark : icon.light;
   }
-
-  useEffect(() => {
-    let isSubscribed = true;
-    setLoading(true);
-    tokensApi.getTokenPrice(id, timeFrame).then((response) => {
-      if (isSubscribed) {
-        setTokenPrice(response.data);
-        setLoading(false);
-      }
-    });
-    return () => (isSubscribed = false);
-  }, [timeFrame]);
 
   const getGraphPoints = () => {
     const graphPoints = [];

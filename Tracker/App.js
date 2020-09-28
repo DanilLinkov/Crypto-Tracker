@@ -1,53 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Appearance, Image, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { CardStyleInterpolators } from "@react-navigation/stack";
+
+import { TimeFrameProvider } from "./components/Utilities/TimeFrameContext";
 import TokenScreen from "./components/screens/TokenScreen";
 import MainScreen from "./components/screens/MainScreen";
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-} from "@react-navigation/native";
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from "@react-navigation/stack";
-import { TimeFrameProvider } from "./components/Utilities/TimeFrameContext";
-
-const Stack = createStackNavigator();
-
-const lightTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: "#FFFFFF",
-  },
-};
-
-const darkTheme = {
-  ...DarkTheme,
-  colors: {
-    ...DarkTheme.colors,
-  },
-};
+import Stack from "./components/Utilities/Stack";
+import NavigatorThemes from "./components/Utilities/NavigatorThemes";
+import useDarkOrLightTheme from "./components/Hooks/useDarkOrLightTheme";
 
 export default function App() {
+  const theme = useDarkOrLightTheme();
   const [timeFrame, setTimeFrame] = useState("month");
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
-
-  useEffect(() => {
-    const initialTheme = Appearance.getColorScheme(); // Works as expected
-    setTheme(initialTheme || "light");
-
-    const listener = () => {
-      const newTheme = Appearance.getColorScheme();
-      setTheme(newTheme || "light");
-    };
-
-    const subscription = Appearance.addChangeListener(listener);
-    return () => {
-      Appearance.removeChangeListener(listener);
-    };
-  }, []);
 
   const changeTimeFrameContext = (newTimeFrame) => {
     setTimeFrame(newTimeFrame);
@@ -55,7 +19,13 @@ export default function App() {
 
   return (
     <TimeFrameProvider value={{ timeFrame, changeTimeFrameContext }}>
-      <NavigationContainer theme={theme === "dark" ? darkTheme : lightTheme}>
+      <NavigationContainer
+        theme={
+          theme === "dark"
+            ? NavigatorThemes.darkTheme
+            : NavigatorThemes.lightTheme
+        }
+      >
         <Stack.Navigator
           screenOptions={{
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -81,5 +51,3 @@ export default function App() {
     </TimeFrameProvider>
   );
 }
-
-const styles = StyleSheet.create({});

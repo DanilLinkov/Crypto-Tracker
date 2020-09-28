@@ -1,18 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import Screen from "../Utilities/Screen";
+import React, { useContext } from "react";
+import { FlatList } from "react-native";
+
 import TimeFrameConxtext from "../Utilities/TimeFrameContext";
 import TokenCard from "./TokenCard";
 
 export default function TokenCardsContainer({ data, refresh, refreshing }) {
-  const navigation = useNavigation();
   const timeFrame = useContext(TimeFrameConxtext);
 
   const renderItem = ({ item }) => (
@@ -36,9 +28,3 @@ export default function TokenCardsContainer({ data, refresh, refreshing }) {
     />
   );
 }
-
-const styles = StyleSheet.create({
-  tokenCardsContainer: {
-    width: 360,
-  },
-});

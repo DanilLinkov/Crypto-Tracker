@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 import { AntDesign } from "@expo/vector-icons";
 import Colours from "../Utilities/Colours";
 import { useNavigation } from "@react-navigation/native";
@@ -47,7 +48,6 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   nameText: {
-    //color: Colours.light.primary,
     fontSize: 18,
     marginLeft: 12,
     marginRight: 12,
