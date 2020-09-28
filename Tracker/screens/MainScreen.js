@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import tokensApi from "../api/tokensApi";
@@ -11,10 +12,12 @@ export default function MainScreen() {
   const [tokenList, setTokenList] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const navigatorTheme = useTheme();
 
   useEffect(() => {
     loadTokens();
-  }, [searchFilter]);
+  }, [searchFilter, refreshing]);
 
   const loadTokens = async () => {
     setLoading(true);
@@ -31,19 +34,24 @@ export default function MainScreen() {
           id: token.id,
           name: token.name,
           symbol: token.symbol,
-          icon: token.icon_address,
+          icon: navigatorTheme.dark
+            ? token.icon_address_dark
+            : token.icon_address,
         });
       } else if (setSearchFilter.length < 1) {
         filteredResponse.push({
           id: token.id,
           name: token.name,
           symbol: token.symbol,
-          icon: token.icon_address,
+          icon: navigatorTheme.dark
+            ? token.icon_address_dark
+            : token.icon_address,
         });
       }
     });
 
     setLoading(false);
+    setRefreshing(false);
     setTokenList(filteredResponse);
   };
 
@@ -57,7 +65,7 @@ export default function MainScreen() {
       </View>
       <View>
         {!loading ? (
-          <TokenCardsContainer data={tokenList} />
+          <TokenCardsContainer data={tokenList} refresh={setRefreshing} />
         ) : (
           <ActivityIndicator
             size="large"

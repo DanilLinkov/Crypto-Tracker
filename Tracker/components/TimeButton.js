@@ -1,18 +1,28 @@
+import { useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import Colours from "./Colours";
 import TimeFrameConxtext from "./TimeFrameContext";
 
 export default function TimeButton({ name }) {
-  const { timeFrame, changeContext } = useContext(TimeFrameConxtext);
+  const { timeFrame, changeTimeFrameContext } = useContext(TimeFrameConxtext);
+  const navigatorTheme = useTheme();
+
+  const theme = navigatorTheme.dark ? Colours.dark : Colours.light;
 
   return (
     <TouchableOpacity
       style={[styles.button]}
-      onPress={() => changeContext(name)}
+      onPress={() => changeTimeFrameContext(name)}
       hitSlop={{ top: 10, left: 10, bottom: 0, right: 10 }}
     >
-      <Text style={timeFrame === name ? styles.selected : styles.unSelected}>
+      <Text
+        style={[
+          timeFrame === name
+            ? [styles.selected, { color: theme.graph }]
+            : [styles.unSelected, { color: theme.secondary }],
+        ]}
+      >
         {name}
       </Text>
     </TouchableOpacity>
@@ -27,12 +37,12 @@ const styles = StyleSheet.create({
     marginRight: 22,
   },
   selected: {
-    color: Colours.light.graph,
+    //color: Colours.light.graph,
     alignSelf: "center",
     fontSize: 15,
   },
   unSelected: {
-    color: Colours.light.secondary,
+    //color: Colours.light.secondary,
     alignSelf: "center",
     fontSize: 15,
   },

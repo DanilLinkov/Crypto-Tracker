@@ -4,8 +4,10 @@ import { AntDesign } from "@expo/vector-icons";
 import Colours from "./Colours";
 import { useNavigation } from "@react-navigation/native";
 
-export default function TokenScreenHeader({ name, icon }) {
+export default function TokenScreenHeader({ name, icon, isDark }) {
   const navigation = useNavigation();
+
+  const theme = isDark ? Colours.dark : Colours.dark;
 
   return (
     <View style={styles.headerContainer}>
@@ -15,7 +17,7 @@ export default function TokenScreenHeader({ name, icon }) {
         }}
         hitSlop={{ top: 20, right: 20, left: 20, bottom: 20 }}
       >
-        <AntDesign name="left" size={24} color="#495162" />
+        <AntDesign name="left" size={24} color={theme.primary} />
       </TouchableOpacity>
       <View style={styles.titleIconContainer}>
         <Image
@@ -25,7 +27,7 @@ export default function TokenScreenHeader({ name, icon }) {
             height: 36,
           }}
         />
-        <Text style={styles.nameText}>{name}</Text>
+        <Text style={[styles.nameText, { color: theme.primary }]}>{name}</Text>
       </View>
       <View></View>
     </View>
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   nameText: {
-    color: Colours.light.primary,
+    //color: Colours.light.primary,
     fontSize: 18,
     marginLeft: 12,
     marginRight: 12,

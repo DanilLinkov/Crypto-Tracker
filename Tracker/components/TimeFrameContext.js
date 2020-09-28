@@ -2,7 +2,7 @@ import React from "react";
 
 const TimeFrameConxtext = React.createContext({
   timeFrame: "month",
-  changeContext: () => {},
+  changeTimeFrameContext: () => {},
 });
 
 export const TimeFrameProvider = TimeFrameConxtext.Provider;

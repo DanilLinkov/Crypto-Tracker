@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -7,14 +7,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { LineChart } from "react-native-svg-charts";
-import * as shape from "d3-shape";
 import tokensApi from "../api/tokensApi";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import Colours from "./Colours";
 import GradientGraph from "./GradientGraph";
 import NumberFormat from "react-number-format";
-import ThemeContext from "./ThemeContext";
 
 export default function TokenCard({
   icon,
@@ -28,9 +25,9 @@ export default function TokenCard({
   const [tokenPrice, setTokenPrice] = useState({});
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
-  const themeContext = useContext(ThemeContext);
+  const navigationTheme = useTheme();
 
-  const theme = themeContext.theme ? Colours.dark : Colours.light;
+  const theme = navigationTheme.dark ? Colours.dark : Colours.light;
 
   useEffect(() => {
     let isSubscribed = true;
@@ -83,9 +80,11 @@ export default function TokenCard({
       <NumberFormat
         renderText={(text) => (
           <Text
-            style={
-              precentageChange > 0 ? styles.greenPriceText : styles.redPriceText
-            }
+            style={[
+              precentageChange > 0
+                ? [styles.greenPriceText, { color: theme.green }]
+                : [styles.redPriceText, { color: theme.red }],
+            ]}
           >
             {precentageChange}% ({text})
           </Text>
@@ -117,6 +116,7 @@ export default function TokenCard({
       <View
         style={[
           styles.container,
+          { backgroundColor: theme.background, borderColor: theme.border },
           stylesProp,
           icon || name
             ? { width: 343, height: 140 }
@@ -146,7 +146,9 @@ export default function TokenCard({
                     height: 36,
                   }}
                 />
-                <Text style={styles.nameText}>{name}</Text>
+                <Text style={(styles.nameText, { color: theme.primary })}>
+                  {name}
+                </Text>
               </View>
               <View
                 style={
@@ -160,6 +162,7 @@ export default function TokenCard({
                     <Text
                       style={[
                         styles.mainPriceText,
+                        { color: theme.primary },
                         icon || name ? { fontSize: 13 } : { fontSize: 18 },
                       ]}
                     >
@@ -191,9 +194,9 @@ export default function TokenCard({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colours.light.background,
+    //backgroundColor: Colours.light.background,
     borderWidth: 2,
-    borderColor: Colours.light.border,
+    //borderColor: Colours.light.border,
     borderRadius: 15,
     marginTop: 16,
     overflow: "hidden",
@@ -224,17 +227,17 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   nameText: {
-    color: Colours.light.primary,
+    //color: Colours.light.primary,
     fontFamily: "sans-serif",
     fontWeight: "bold",
     fontSize: 14,
   },
   mainPriceText: {
-    color: Colours.light.primary,
+    //color: Colours.light.primary,
     fontWeight: "bold",
   },
   greenPriceText: {
-    color: Colours.light.green,
+    //color: Colours.light.green,
     fontFamily: "sans-serif",
     fontWeight: "bold",
   },

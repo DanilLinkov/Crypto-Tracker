@@ -10,15 +10,23 @@ import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import * as Animate from "react-native-animatable";
 import Colours from "./Colours";
+import { useTheme } from "@react-navigation/native";
 
 export default function MainScreenHeader({ onChange }) {
   const [show, setShow] = useState(false);
+  const navigatorTheme = useTheme();
+
+  const theme = navigatorTheme.dark ? Colours.dark : Colours.light;
 
   return (
     <View style={!show ? styles.container : styles.headerContainer}>
       <View></View>
       <View>
-        {!show ? <Text style={styles.headerTitle}>Tracker</Text> : null}
+        {!show ? (
+          <Text style={[styles.headerTitle, { color: theme.primary }]}>
+            Tracker
+          </Text>
+        ) : null}
       </View>
       <View>
         {!show ? (
@@ -29,7 +37,7 @@ export default function MainScreenHeader({ onChange }) {
             hitSlop={{ top: 20, right: 20, left: 20, bottom: 20 }}
           >
             <View style={styles.searchIcon}>
-              <Ionicons name="ios-search" size={24} color="black" />
+              <Ionicons name="ios-search" size={24} color={theme.primary} />
             </View>
           </TouchableOpacity>
         ) : (
@@ -49,7 +57,11 @@ export default function MainScreenHeader({ onChange }) {
                 }}
                 hitSlop={{ top: 20, right: 20, left: 20, bottom: 20 }}
               >
-                <AntDesign name="close" size={24} color="black" />
+                <AntDesign
+                  name="closecircleo"
+                  size={24}
+                  color={theme.primary}
+                />
               </TouchableOpacity>
             </View>
           </Animate.View>
@@ -68,7 +80,6 @@ const styles = StyleSheet.create({
     height: 65,
   },
   headerTitle: {
-    color: Colours.light.primary,
     fontSize: 18,
     marginLeft: 65,
   },
