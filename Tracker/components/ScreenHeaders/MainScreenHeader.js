@@ -12,10 +12,15 @@ import { useTheme } from "@react-navigation/native";
 
 import Colours from "../Utilities/Colours";
 
+/**
+ * This component is the header component for the main screen of the application.
+ * @param {Set search filter for the token list} param0
+ */
 export default function MainScreenHeader({ onChange }) {
   const [show, setShow] = useState(false);
   const navigatorTheme = useTheme();
 
+  // Theme variable which is used to render this component conditionally based on the theme
   const theme = navigatorTheme.dark ? Colours.dark : Colours.light;
 
   return (

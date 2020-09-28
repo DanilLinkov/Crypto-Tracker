@@ -10,6 +10,10 @@ import TokenScreenHeader from "../ScreenHeaders/TokenScreenHeader";
 import NumberFormat from "react-number-format";
 import Colours from "../Utilities/Colours";
 
+/**
+ * This is the token screen component used to display the specific token holding
+ * the token header, time frame selection bar and the token card with its information.
+ */
 export default function TokenScreen() {
   const route = useRoute();
   const { id, symbol, market_cap, volume_24h, icon, name } = route.params;

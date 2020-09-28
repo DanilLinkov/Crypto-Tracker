@@ -5,6 +5,10 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import Colours from "../Utilities/Colours";
 import TimeFrameConxtext from "../Utilities/TimeFrameContext";
 
+/**
+
+ * @param {Name of the button} param0
+ */
 export default function TimeButton({ name }) {
   const { timeFrame, changeTimeFrameContext } = useContext(TimeFrameConxtext);
   const navigatorTheme = useTheme();

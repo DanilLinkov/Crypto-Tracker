@@ -5,6 +5,10 @@ import { AntDesign } from "@expo/vector-icons";
 import Colours from "../Utilities/Colours";
 import { useNavigation } from "@react-navigation/native";
 
+/**
+ *
+ * @param {Name of the token, Icon object with dark and normal png uri values, boolean value for whether the theme is dark } param0
+ */
 export default function TokenScreenHeader({ name, icon, isDark }) {
   const navigation = useNavigation();
 

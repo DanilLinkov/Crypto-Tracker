@@ -6,6 +6,10 @@ import * as shape from "d3-shape";
 
 import Colours from "../Utilities/Colours";
 
+/**
+ * This component is re-used to display the normal chart for the token card and the gradient chart
+ * @param {graph data of token prices, boolean value whether to disable the gradient} param0
+ */
 export default function GradientGraph({ data, gradientDisabled }) {
   const Gradient = ({ index }) => (
     <Defs key={index}>

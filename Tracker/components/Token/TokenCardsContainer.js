@@ -4,6 +4,10 @@ import { FlatList } from "react-native";
 import TimeFrameConxtext from "../Utilities/TimeFrameContext";
 import TokenCard from "./TokenCard";
 
+/**
+ * This component is used to hold the list of token cards in a flat list
+ * @param {graph data of token prices, refresh the list function, boolean for whether its refreshing or not} param0
+ */
 export default function TokenCardsContainer({ data, refresh, refreshing }) {
   const timeFrame = useContext(TimeFrameConxtext);
 

@@ -14,6 +14,12 @@ import Colours from "../Utilities/Colours";
 import GradientGraph from "./GradientGraph";
 import useTokenPrice from "../Hooks/useTokenPrice";
 
+/**
+ * This component is re-used in the main screen and token screen by using conditional css based on the props provided
+ *
+ * @param {Icon object of dark and light theme links,name,id, symbol of the token,
+ * time frame for which to fetch the price data for, extra external syle prop, disable touchable} param0
+ */
 export default function TokenCard({
   icon,
   name,
@@ -69,6 +75,8 @@ export default function TokenCard({
   const getPriceString = () => {
     const { currencyChange, precentageChange } = calculatePriceChange();
 
+    const symbol = precentageChange > 0 ? "+" : "-";
+
     return (
       <NumberFormat
         renderText={(text) => (
@@ -79,6 +87,7 @@ export default function TokenCard({
                 : [styles.precentText, { color: theme.red }],
             ]}
           >
+            {symbol}
             {precentageChange}% ({text})
           </Text>
         )}
@@ -92,7 +101,7 @@ export default function TokenCard({
 
   return (
     <TouchableOpacity
-      disabled={disabled}
+      disabled={disabled || loading}
       hitSlop={{ top: -16 }}
       onPress={() =>
         navigation.navigate("TokenPage", {

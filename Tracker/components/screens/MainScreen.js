@@ -9,6 +9,10 @@ import Screen from "../Utilities/Screen";
 import TimeSelector from "../ScreenHeaders/TimeSelector";
 import TokenCardsContainer from "../Token/TokenCardsContainer";
 
+/**
+ * This is the main screen component used to hold the token list container, main screen header and the time frame selection baar.
+ * Calls the api to retrive a list of tokens and then filters them based on the search filter.
+ */
 export default function MainScreen() {
   const [tokenList, setTokenList] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
